@@ -18,23 +18,54 @@ export default class App extends Component {
   };
 
   handleChange = (event) => {
-    console.log('Handle Change');
+    this.setState({
+      item: event.target.value
+    });
   };
 
   handleSubmit = (event) => {
-    console.log('Handle Submit');
+    event.preventDefault();
+
+    const newItem = {
+      id: this.state.id,
+      title: this.state.item
+    };
+    const updatedItems = [...this.state.items, newItem];
+
+    this.setState({
+      items: updatedItems,
+      item: '',
+      id: uuid(),
+      editItem: false
+    });
+
   };
 
-  clearList = (event) => {
-    console.log('Clear List');
+  clearList = () => {
+    this.setState({
+      items: []
+    })
   };
 
-  handleDelete = (event) => {
-    console.log('Handle Delete');
+  handleDelete = (id) => {
+    const filteredItems = this.state.items.filter((item) => item.id !== id);
+    this.setState({
+      items: filteredItems
+    })
   };
 
-  handleEdit = (event) => {
-    console.log('Handle Edit');
+  handleEdit = (id) => {
+  const filteredItems = this.state.items.filter((item) => item.id !== id);
+  const selectedItem = this.state.items.find(item => item.id === id);
+
+  this.setState({
+    items: filteredItems,
+    item: selectedItem.title,
+    id: id,
+    editItem: true
+  });
+
+
   };
 
   render() {

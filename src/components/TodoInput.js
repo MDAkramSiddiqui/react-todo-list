@@ -23,7 +23,13 @@ export default class TodoInput extends Component {
                         style={{borderRadius: "3px"}}
                         />
 
-                        <button className="btn btn-block btn-primary text-uppercase mt-3" type="Submit">add item</button>
+                        <button 
+                        disabled={item?false:true}
+                        className={
+                        editItem ? "btn btn-block btn-success mt-3 text-uppercase" : "btn btn-block btn-primary text-uppercase mt-3" } 
+                        type="Submit"> 
+                            {editItem ? "edit item" : "add item"}
+                        </button>
 
                     </div>
                 </form>
